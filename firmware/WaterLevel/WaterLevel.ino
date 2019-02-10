@@ -53,6 +53,29 @@ void loop() {
 }
 
 
+void iniCheck()
+{
+  int L = digitalRead(G);
+  int H = digitalRead(R);
+  int M = digitalRead(Y);
+
+  if(L == 0 && H == 1)
+  {
+    digitalWrite(motor, LOW);
+  }
+
+  else if(L == 0 && H == 0)
+  {
+    digitalWrite(motor, HIGH);
+    digitalWrite(buzzer, HIGH);
+    digitalWrite(13, HIGH);
+  }
+
+  delay(100);  
+  
+}
+
+
 void automatic()
 {
   int L = digitalRead(G);
