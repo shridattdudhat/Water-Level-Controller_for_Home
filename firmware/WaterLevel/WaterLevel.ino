@@ -1,36 +1,24 @@
 /*
-  Blink
+  Water Level Controller by Arduino
 
-  Turns an LED on for one second, then off for one second, repeatedly.
-
-  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO
-  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
-  the correct LED pin independent of which board is used.
-  If you want to know what pin the on-board LED is connected to on your Arduino
-  model, check the Technical Specs of your board at:
-  https://www.arduino.cc/en/Main/Products
-
-  modified 8 May 2014
-  by Scott Fitzgerald
-  modified 2 Sep 2016
-  by Arturo Guadalupi
-  modified 8 Sep 2016
-  by Colby Newman
+  Check the water level by the probe inserted in the tank
 
   This example code is in the public domain.
 
-  http://www.arduino.cc/en/Tutorial/Blink
+  http://shridatt.github.io
 */
 
-#define motor 12
-#define G 2
-#define R 3
+#define motor 12 // motor drive pin
+#define G 2 // green cable
+#define R 3 // red cable
 #define Y 4
-#define buzzer 9
-#define SW 7
+#define buzzer 9 // buzzer pin
+#define SW 7 // manual automatic switch
 
 
 void setup() {
+
+  // setting mode as input pullup to avoid any additional resistor requirments
   
   pinMode(G, INPUT_PULLUP);
   pinMode(R, INPUT_PULLUP);
@@ -50,16 +38,16 @@ void setup() {
 
 void loop() {
 
-  int SW_State = digitalRead(SW);
+  int SW_State = digitalRead(SW); //read the switch state
 
   if(SW_State == 1)
   {
-    automatic();
+    automatic(); // calling automatic function
   }
 
   else
   {
-    manual();
+    manual(); // calling manual function
   }
 
 }
