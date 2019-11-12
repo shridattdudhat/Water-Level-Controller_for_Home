@@ -57,7 +57,7 @@ void setup() {
   pinMode(SW, INPUT_PULLUP);
 
   pinMode(motor, OUTPUT);
-  
+
   digitalWrite(motor, HIGH);
 
   delay(5000);
@@ -73,17 +73,15 @@ void loop() {
   unsigned long currentMillis = millis();
 
   if (currentMillis - previousMillis >= interval) {
-    // save the last time you blinked the LED
+
     previousMillis = currentMillis;
 
-    // if the LED is off turn it on and vice-versa:
     if (ledState == LOW) {
       ledState = HIGH;
     } else {
       ledState = LOW;
     }
 
-    // set the LED with the ledState of the variable:
     digitalWrite(LEDG, ledState);
   }
 
@@ -109,7 +107,7 @@ void automatic()
   int H = digitalRead(GREEN);
   int L = digitalRead(RED);
 
-  if (L == 1 && H == 1)
+  if (L == 1 && H == 1)                    //Tank Empty
   {
     //digitalWrite(motor, LOW);
     digitalWrite(buzzer, LOW);
@@ -119,11 +117,11 @@ void automatic()
     Serial.print("Motor ON!");
   }
 
-  else if (L == 0 && H == 0)
+  else if (L == 0 && H == 0)               //Tank Full
   {
     //digitalWrite(motor, HIGH);
     //digitalWrite(buzzer, HIGH);
-    
+
     alert();
 
     color(0, 0, 1); //BLUE
@@ -131,7 +129,7 @@ void automatic()
     Serial.print("Motor OFF!");
   }
 
-  else
+  else                                      //Tank Half
   {
     color(0, 1, 0); //GREEN
     //digitalWrite(buzzer, LOW);
