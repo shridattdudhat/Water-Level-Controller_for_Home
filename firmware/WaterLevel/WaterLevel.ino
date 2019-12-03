@@ -35,7 +35,9 @@
 #define G           6
 #define B           9
 
-int ledState = LOW;
+bool ledState = LOW;
+bool motorFlag = HIGH;
+
 unsigned long previousMillis = 0;
 const long interval = 1000;
 
@@ -58,11 +60,9 @@ void setup() {
 
   pinMode(motor, OUTPUT);
 
-  digitalWrite(motor, HIGH);
-
+  motorState(LOW);
   delay(5000);
-
-  digitalWrite(motor, LOW);
+  motorState(HIGH);
 
   Serial.begin(9600);
 
@@ -107,32 +107,28 @@ void automatic()
   int H = digitalRead(GREEN);
   int L = digitalRead(RED);
 
-  if (L == 1 && H == 1)                    //Tank Empty
+  if (L == 1 && H == 1)                     //Tank Empty
   {
-    //digitalWrite(motor, LOW);
-    digitalWrite(buzzer, LOW);
-
-    color(1, 0, 0); //RED
-
+    if(motorFlag == HIGH)
+    {
+    motorState(HIGH);                       //Motor is on
+    }
+    color(1, 0, 0);                         //RED
     Serial.print("Motor ON!");
   }
 
-  else if (L == 0 && H == 0)               //Tank Full
+  else if (L == 0 && H == 0)                //Tank Full
   {
-    //digitalWrite(motor, HIGH);
-    //digitalWrite(buzzer, HIGH);
-
+    motorFlag == LOW;
+    motorState(LOW);                        //Motor is off
     alert();
-
-    color(0, 0, 1); //BLUE
-
+    color(0, 0, 1);                         //BLUE
     Serial.print("Motor OFF!");
   }
 
   else                                      //Tank Half
   {
-    color(0, 1, 0); //GREEN
-    //digitalWrite(buzzer, LOW);
+    color(0, 1, 0);                         //GREEN
   }
 }
 
@@ -140,7 +136,7 @@ void automatic()
 void manual()
 {
   Serial.println("Manual Mode !");
-  digitalWrite(motor, LOW);
+  motorState(HIGH);                       // Motor is on
   color(1, 0, 0);
   delay(100);
   color(0, 1, 0);
@@ -162,4 +158,9 @@ void alert()
   delay(100);
   digitalWrite(buzzer, LOW);
   delay(100);
+}
+
+void motorState(bool x)
+{
+  digitalWrite(motor, !x);
 }
