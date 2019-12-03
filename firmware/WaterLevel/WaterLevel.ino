@@ -42,7 +42,7 @@ unsigned long previousMillis = 0;
 const long interval = 1000;
 
 void setup() {
-
+ /*Setting up the pinModes*/
   pinMode(statusLED, OUTPUT);
   pinMode(LEDG, OUTPUT);
   pinMode(LEDR, OUTPUT);
@@ -60,28 +60,28 @@ void setup() {
 
   pinMode(motor, OUTPUT);
 
-  motorState(LOW);
+  motorState(LOW); //Initially motor is off
   delay(5000);
-  motorState(HIGH);
+  motorState(HIGH); // turn on motor after 5 seconds
 
   Serial.begin(9600);
-
 }
 
 void loop() {
-
+  
   unsigned long currentMillis = millis();
 
-  if (currentMillis - previousMillis >= interval) {
-
+  if (currentMillis - previousMillis >= interval)
+  {
     previousMillis = currentMillis;
-
-    if (ledState == LOW) {
+    if (ledState == LOW)
+    {
       ledState = HIGH;
-    } else {
+    }
+    else
+    {
       ledState = LOW;
     }
-
     digitalWrite(LEDG, ledState);
   }
 
@@ -91,7 +91,6 @@ void loop() {
   {
     manual();
   }
-
   else
   {
     automatic();
@@ -101,12 +100,9 @@ void loop() {
 
 void automatic()
 {
-
   Serial.println("Automatic Mode !");
-
   int H = digitalRead(GREEN);
   int L = digitalRead(RED);
-
   if (L == 1 && H == 1)                     //Tank Empty
   {
     if(motorFlag == HIGH)
@@ -116,7 +112,6 @@ void automatic()
     color(1, 0, 0);                         //RED
     Serial.print("Motor ON!");
   }
-
   else if (L == 0 && H == 0)                //Tank Full
   {
     motorFlag == LOW;
@@ -125,7 +120,6 @@ void automatic()
     color(0, 0, 1);                         //BLUE
     Serial.print("Motor OFF!");
   }
-
   else                                      //Tank Half
   {
     color(0, 1, 0);                         //GREEN
