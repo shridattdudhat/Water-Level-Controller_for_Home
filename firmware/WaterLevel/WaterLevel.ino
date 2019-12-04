@@ -27,7 +27,7 @@
 #define GREEN       2
 #define RED         3
 #define buzzer     11
-#define SW 7
+#define SW          7
 #define statusLED  13
 #define LEDG       A0
 #define LEDR       A1
@@ -126,7 +126,8 @@ void automatic()
   }
 }
 
-
+//-------------Manual Function----------------//
+/* Motor will run directly if the switch is pressed*/
 void manual()
 {
   Serial.println("Manual Mode !");
@@ -138,14 +139,14 @@ void manual()
   color(0, 0, 1);
   delay(100);
 }
-
+//-------------RGB Function----------------//
 void color(int red_value, int green_value, int blue_value)
 {
   digitalWrite(R, !red_value);
   digitalWrite(G, !green_value);
   digitalWrite(B, !blue_value);
 }
-
+//-------------Buzzer Function----------------//
 void alert()
 {
   digitalWrite(buzzer, HIGH);
@@ -153,7 +154,7 @@ void alert()
   digitalWrite(buzzer, LOW);
   delay(100);
 }
-
+//-------------Motor Function----------------//
 void motorState(bool x)
 {
   digitalWrite(motor, !x);
