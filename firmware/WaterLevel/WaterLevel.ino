@@ -42,7 +42,7 @@ unsigned long previousMillis = 0;
 const long interval = 1000;
 
 void setup() {
- /*Setting up the pinModes*/
+  /*Setting up the pinModes*/
   pinMode(statusLED, OUTPUT);
   pinMode(LEDG, OUTPUT);
   pinMode(LEDR, OUTPUT);
@@ -68,7 +68,7 @@ void setup() {
 }
 
 void loop() {
-  
+
   unsigned long currentMillis = millis();
 
   if (currentMillis - previousMillis >= interval)
@@ -105,24 +105,26 @@ void automatic()
   int L = digitalRead(RED);
   if (L == 1 && H == 1)                     //Tank Empty
   {
-    if(motorFlag == HIGH)
+    if (motorFlag == HIGH)
     {
-    motorState(HIGH);                       //Motor is on
+      motorState(HIGH);                       //Motor is on
     }
     color(1, 0, 0);                         //RED
     Serial.print("Motor ON!");
   }
-  else if (L == 0 && H == 0)                //Tank Full
+
+  if (L == 0 && H == 1)                     //Tank Half
   {
-    motorFlag == LOW;
+    color(0, 1, 0);                         //GREEN
+  }
+
+  if (L == 0 && H == 0)                    //Tank Full
+  {
+    motorFlag = LOW;
     motorState(LOW);                        //Motor is off
     alert();
     color(0, 0, 1);                         //BLUE
     Serial.print("Motor OFF!");
-  }
-  else                                      //Tank Half
-  {
-    color(0, 1, 0);                         //GREEN
   }
 }
 
