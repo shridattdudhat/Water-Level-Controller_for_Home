@@ -39,9 +39,11 @@ bool ledState = LOW;
 bool motorFlag = HIGH;
 
 unsigned long previousMillis = 0;
-const long interval = 1000;
+const long interval = 500;
 
 void setup() {
+
+  Serial.begin(9600);
   /*Setting up the pinModes*/
   pinMode(statusLED, OUTPUT);
   pinMode(LEDG, OUTPUT);
@@ -63,8 +65,6 @@ void setup() {
   motorState(LOW); //Initially motor is off
   delay(5000);
   motorState(HIGH); // turn on motor after 5 seconds
-
-  Serial.begin(9600);
 }
 
 void loop() {
@@ -110,7 +110,7 @@ void automatic()
       motorState(HIGH);                       //Motor is on
     }
     color(1, 0, 0);                         //RED
-    Serial.print("Motor ON!");
+    Serial.println("Motor ON!");
   }
 
   if (L == 0 && H == 1)                     //Tank Half
@@ -124,7 +124,7 @@ void automatic()
     motorState(LOW);                        //Motor is off
     alert();
     color(0, 0, 1);                         //BLUE
-    Serial.print("Motor OFF!");
+    Serial.println("Motor OFF!");
   }
 }
 
