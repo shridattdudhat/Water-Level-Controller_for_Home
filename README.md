@@ -16,6 +16,8 @@ by Shridatt Dudhat
 This code is in the public domain.
 http://shridattdudhat.github.io
 
+![photo_2020-11-19_15-15-10](https://user-images.githubusercontent.com/28555587/99650918-000b8b80-2a7c-11eb-9244-f32bd02ca8ac.jpg)
+
 ![image](https://user-images.githubusercontent.com/28555587/93738080-8170aa00-fc02-11ea-819e-62bad9f96655.png)
 
 ![image](https://user-images.githubusercontent.com/28555587/95045279-3a54df80-06ff-11eb-917c-44fdb864584e.png)
